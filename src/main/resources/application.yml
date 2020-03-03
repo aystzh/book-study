@@ -1,0 +1,18 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /bookStudy
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  profiles:
+    active: test
+
+#以下为公用属性配置
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-handlers-package: com.elensdata.base.enums.handeler
+  config-location: classpath:mybatis-config.xml
