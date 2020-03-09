@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aystzh.com.study.dao.AuthorMapper">
+  <resultMap id="BaseResultMap" type="aystzh.com.study.entity.Author">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+  </resultMap>
+</mapper>

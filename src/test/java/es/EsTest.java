@@ -1,10 +1,7 @@
 package es;
 
-import aystzh.com.base.thread.TestThread;
 import aystzh.com.study.BookStudyApplication;
-import aystzh.com.study.entity.db.AuthorEntity;
 import aystzh.com.study.entity.index.AuthorIndexEntity;
-import aystzh.com.study.mapper.AuthorEntityMapper;
 import aystzh.com.study.repository.AuthorIndexRepository;
 import aystzh.com.study.utils.BeanMapping;
 import com.google.common.collect.Lists;
@@ -27,7 +24,7 @@ public class EsTest {
     @Resource
     private AuthorIndexRepository authorIndexRepository;
 
-    @Resource
+    /*@Resource
     private AuthorEntityMapper authorEntityMapper;
 
     @Test
@@ -44,5 +41,5 @@ public class EsTest {
         work.doWork(new AuthorEntity());
         work.addTask(new AuthorEntity());
         work.addTask(Lists.newArrayList());
-    }
+    }*/
 }
