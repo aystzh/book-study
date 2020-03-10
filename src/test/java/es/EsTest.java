@@ -1,6 +1,6 @@
 package es;
 
-import aystzh.com.study.BookStudyApplication;
+import aystzh.com.BookStudyApplication;
 import aystzh.com.study.entity.index.AuthorIndexEntity;
 import aystzh.com.study.repository.AuthorIndexRepository;
 import aystzh.com.study.utils.BeanMapping;

@@ -1,4 +1,4 @@
-package aystzh.com.study;
+package aystzh.com;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @ComponentScan("aystzh.com")
-@MapperScan(basePackages = {"aystzh.com.study.mapper"})
+@MapperScan(basePackages = {"aystzh.com.study.dao"})
 @EnableScheduling
 public class BookStudyApplication extends SpringBootServletInitializer {
 

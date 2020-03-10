@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -25,6 +26,12 @@ import static aystzh.com.base.core.ProjectConstant.MODEL_PACKAGE;
 public class MybatisConfigurer {
 
     @Bean
+    public CustomInterceptor dateTimeInterceptor() {
+        return new CustomInterceptor();
+    }
+
+
+    @Bean
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
@@ -38,8 +45,8 @@ public class MybatisConfigurer {
         properties.setProperty("supportMethodsArguments", "true");//支持通过 Mapper 接口参数来传递分页参数
         pageHelper.setProperties(properties);
 
-        //添加插件
-        factory.setPlugins(new Interceptor[]{pageHelper});
+        //添加插件 分页插件和时间处理插件
+        factory.setPlugins(new Interceptor[]{pageHelper,dateTimeInterceptor()});
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -62,6 +69,7 @@ public class MybatisConfigurer {
 
         return mapperScannerConfigurer;
     }
+
 
 }
 

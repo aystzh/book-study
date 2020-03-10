@@ -8,6 +8,7 @@ import ${basePackage}.service.${modelNameUpperCamel}Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class ${modelNameUpperCamel}Controller {
 
     @PutMapping
     public Wrapper update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        Assert.notNull(${modelNameLowerCamel}.getId(),"id cant be null");
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         return WrapMapper.ok();
     }

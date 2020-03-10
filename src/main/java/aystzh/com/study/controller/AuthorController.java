@@ -8,6 +8,7 @@ import aystzh.com.study.service.AuthorService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class AuthorController {
 
     @PutMapping
     public Wrapper update(@RequestBody Author author) {
+        Assert.notNull(author.getId(),"id cant be null");
         authorService.update(author);
         return WrapMapper.ok();
     }
