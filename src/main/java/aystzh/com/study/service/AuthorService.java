@@ -4,7 +4,7 @@ import aystzh.com.base.core.Service;
 
 
 /**
- * Created by CodeGenerator on 2020/03/10.
+ * Created by zhanghuan on 2020/03/10.
  */
 public interface AuthorService extends Service<Author> {
 

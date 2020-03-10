@@ -1,4 +1,4 @@
-package aystzh.com.study.utils;
+package aystzh.com.base.response;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;

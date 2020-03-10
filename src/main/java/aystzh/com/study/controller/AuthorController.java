@@ -1,54 +1,56 @@
 package aystzh.com.study.controller;
 
-import aystzh.com.base.core.Result;
-import aystzh.com.base.core.ResultGenerator;
+import aystzh.com.base.response.ApiResponse;
+import aystzh.com.base.response.WrapMapper;
+import aystzh.com.base.response.Wrapper;
 import aystzh.com.study.entity.Author;
 import aystzh.com.study.service.AuthorService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2020/03/10.
+* Created by zhanghuan on 2020/03/10.
 */
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
-    @Resource
+    @Autowired
     private AuthorService authorService;
 
     @PostMapping
-    public Result add(@RequestBody Author author) {
+    public Wrapper add(@RequestBody Author author) {
         authorService.save(author);
-        return ResultGenerator.genSuccessResult();
+        return WrapMapper.ok();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Wrapper delete(@PathVariable Integer id) {
         authorService.deleteById(id);
-        return ResultGenerator.genSuccessResult();
+        return WrapMapper.ok();
     }
 
     @PutMapping
-    public Result update(@RequestBody Author author) {
+    public Wrapper update(@RequestBody Author author) {
         authorService.update(author);
-        return ResultGenerator.genSuccessResult();
+        return WrapMapper.ok();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Wrapper detail(@PathVariable Integer id) {
         Author author = authorService.findById(id);
-        return ResultGenerator.genSuccessResult(author);
+        return WrapMapper.ok().result(author);
     }
 
     @GetMapping
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Wrapper list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<Author> list = authorService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        PageInfo<Author> pageInfo = new PageInfo<>(list);
+        ApiResponse<Author> apiResponse = new ApiResponse<>(pageInfo.getPages(), pageInfo.getPageSize(), pageInfo.getList(), pageInfo.getTotal());
+        return WrapMapper.ok().result(apiResponse);
     }
 }
