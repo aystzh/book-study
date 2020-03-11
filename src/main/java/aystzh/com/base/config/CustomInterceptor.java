@@ -5,7 +5,8 @@ package aystzh.com.base.config;
  */
 
 import aystzh.com.base.annotations.CreateTime;
-import aystzh.com.base.annotations.UpdateTime;
+import aystzh.com.base.annotations.ModifyTime;
+import lombok.extern.java.Log;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
@@ -21,6 +22,7 @@ import java.util.Properties;
  * 拦截 update 操作（添加和修改）
  */
 // 不能使用xml配置文件，因为会和其他mybatis的配置冲突，因此添加 @Component
+@Log
 @Component
 @Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }) })
 public class CustomInterceptor implements Interceptor {
@@ -46,7 +48,7 @@ public class CustomInterceptor implements Interceptor {
                 }
             }
 
-            if (field.getAnnotation(UpdateTime.class) != null) { // insert 或 update 语句插入 updateTime
+            if (field.getAnnotation(ModifyTime.class) != null) { // insert 或 update 语句插入 updateTime
                 if (SqlCommandType.INSERT.equals(sqlCommandType) || SqlCommandType.UPDATE.equals(sqlCommandType)) {
                     field.setAccessible(true);
                     field.set(parameter, new Timestamp(System.currentTimeMillis()));
@@ -59,12 +61,12 @@ public class CustomInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
-        System.out.println(target);
+        log.info(target.toString());
         return Plugin.wrap(target, this);
     }
 
     @Override
     public void setProperties(Properties properties) {
-        System.out.println(properties.toString());
+        log.info(properties.toString());
     }
 }

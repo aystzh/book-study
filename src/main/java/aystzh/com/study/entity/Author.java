@@ -1,5 +1,9 @@
 package aystzh.com.study.entity;
 
+import aystzh.com.base.annotations.CreateTime;
+import aystzh.com.base.annotations.ModifyTime;
+import aystzh.com.study.enums.YesNoStatus;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -12,7 +16,7 @@ public class Author {
 
     private Byte age;
 
-    private Byte sex;
+    private YesNoStatus sex;
 
     private String email;
 
@@ -21,11 +25,13 @@ public class Author {
 
     private Date birthday;
 
+    @CreateTime
     @Column(name = "create_time")
     private Date createTime;
 
     private String creater;
 
+    @ModifyTime
     @Column(name = "modify_time")
     private Date modifyTime;
 
@@ -73,17 +79,11 @@ public class Author {
         this.age = age;
     }
 
-    /**
-     * @return sex
-     */
-    public Byte getSex() {
+    public YesNoStatus getSex() {
         return sex;
     }
 
-    /**
-     * @param sex
-     */
-    public void setSex(Byte sex) {
+    public void setSex(YesNoStatus sex) {
         this.sex = sex;
     }
 

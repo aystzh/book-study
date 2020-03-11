@@ -13,7 +13,6 @@ spring:
 
 #以下为公用属性配置
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-  type-handlers-package: aystzh.com.base.enums.handeler
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

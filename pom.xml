@@ -94,6 +94,16 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
             <version>3.1.2.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>elasticsearch</artifactId>
+                    <groupId>org.elasticsearch</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>transport-netty4-client</artifactId>
+                    <groupId>org.elasticsearch.plugin</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->

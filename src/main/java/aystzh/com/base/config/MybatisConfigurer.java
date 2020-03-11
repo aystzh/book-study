@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -51,6 +50,7 @@ public class MybatisConfigurer {
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         factory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
+        factory.setTypeHandlersPackage("aystzh.com.base.enums.handeler");
         return factory.getObject();
     }
 
