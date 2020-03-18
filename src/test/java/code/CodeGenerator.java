@@ -184,7 +184,7 @@ public class CodeGenerator {
                 file.getParentFile().mkdirs();
             }
             cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
-            //cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
+            cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
 
             System.out.println(modelNameUpperCamel + "Controller.java 生成成功");
         } catch (Exception e) {
