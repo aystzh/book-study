@@ -6,7 +6,6 @@ import aystzh.com.study.enums.YesNoStatus;
 
 import java.util.Date;
 import javax.persistence.*;
-
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -183,5 +182,22 @@ public class Author {
      */
     public void setModifier(String modifier) {
         this.modifier = modifier;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", sex=" + sex +
+                ", email='" + email + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", birthday=" + birthday +
+                ", createTime=" + createTime +
+                ", creater='" + creater + '\'' +
+                ", modifyTime=" + modifyTime +
+                ", modifier='" + modifier + '\'' +
+                '}';
     }
 }

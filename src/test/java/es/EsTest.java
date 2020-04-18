@@ -1,8 +1,11 @@
 package es;
 
 import aystzh.com.BookStudyApplication;
+import aystzh.com.study.dao.AuthorMapper;
+import aystzh.com.study.entity.Author;
 import aystzh.com.study.entity.index.AuthorIndexEntity;
 import aystzh.com.study.repository.AuthorIndexRepository;
+import aystzh.com.study.service.AuthorService;
 import aystzh.com.study.utils.BeanMapping;
 import com.google.common.collect.Lists;
 import org.junit.Test;
@@ -10,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import tk.mybatis.mapper.entity.Condition;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,6 +29,8 @@ public class EsTest {
     @Resource
     private AuthorIndexRepository authorIndexRepository;
 
+    @Resource
+    private AuthorMapper authorMapper;
     /*@Resource
     private AuthorEntityMapper authorEntityMapper;
 
@@ -42,4 +49,7 @@ public class EsTest {
         work.addTask(new AuthorEntity());
         work.addTask(Lists.newArrayList());
     }*/
+
+
 }
+
