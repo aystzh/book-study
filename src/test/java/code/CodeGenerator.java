@@ -1,6 +1,7 @@
 package code;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.collect.Lists;
 import freemarker.template.TemplateExceptionHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
@@ -25,7 +26,7 @@ public class CodeGenerator {
     private static final String JDBC_PASSWORD = "Root123456!";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
-    private static final String PROJECT_PATH = "/Users/zhanghuan/elens_new/book-study";//项目在硬盘上的基础路径
+    private static final String PROJECT_PATH = "/Users/zhanghuan/project/github/book-study";//项目在硬盘上的基础路径
     private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/generator/template";//模板位置
 
     private static final String JAVA_PATH = "/src/main/java"; //java文件路径
@@ -39,7 +40,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCode("author");
+        genCode("sys_admin","sys_admin_role","sys_menu","sys_menu_role","sys_role");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 
@@ -144,6 +145,10 @@ public class CodeGenerator {
             data.put("modelNameUpperCamel", modelNameUpperCamel);
             data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
             data.put("basePackage", BASE_PACKAGE);
+            data.put("servicePackage", SERVICE_PACKAGE);
+            data.put("serviceImplPackage", SERVICE_IMPL_PACKAGE);
+            data.put("modelPackage", MODEL_PACKAGE);
+            data.put("mapperPackage", MAPPER_PACKAGE);
             data.put("corePackage", CORE_PACKAGE);
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + modelNameUpperCamel + "Service.java");
             if (!file.getParentFile().exists()) {
@@ -178,13 +183,15 @@ public class CodeGenerator {
             data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
             data.put("basePackage", BASE_PACKAGE);
             data.put("corePackage", CORE_PACKAGE);
-
+            data.put("controllerPackage", CONTROLLER_PACKAGE);
+            data.put("servicePackage", SERVICE_PACKAGE);
+            data.put("modelPackage", MODEL_PACKAGE);
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_CONTROLLER + modelNameUpperCamel + "Controller.java");
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
             cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
-            cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
+            //cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
 
             System.out.println(modelNameUpperCamel + "Controller.java 生成成功");
         } catch (Exception e) {

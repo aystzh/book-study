@@ -3,21 +3,17 @@ package aystzh.com.study.entity.security;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "sys_role")
-public class SysRole {
+@Table(name = "sys_menu_role")
+public class SysMenuRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    /**
-     * 角色名称
-     */
-    private String name;
+    @Column(name = "menu_id")
+    private Integer menuId;
 
-    /**
-     * 角色描述
-     */
-    private String description;
+    @Column(name = "role_id")
+    private Integer roleId;
 
     private Integer creator;
 
@@ -44,39 +40,31 @@ public class SysRole {
     }
 
     /**
-     * 获取角色名称
-     *
-     * @return name - 角色名称
+     * @return menu_id
      */
-    public String getName() {
-        return name;
+    public Integer getMenuId() {
+        return menuId;
     }
 
     /**
-     * 设置角色名称
-     *
-     * @param name 角色名称
+     * @param menuId
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
     }
 
     /**
-     * 获取角色描述
-     *
-     * @return description - 角色描述
+     * @return role_id
      */
-    public String getDescription() {
-        return description;
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**
-     * 设置角色描述
-     *
-     * @param description 角色描述
+     * @param roleId
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     /**

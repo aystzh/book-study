@@ -1,10 +1,10 @@
-package ${basePackage}.controller;
+package ${controllerPackage};
 
 import ${corePackage}.base.response.ApiResponse;
 import ${corePackage}.base.response.WrapMapper;
 import ${corePackage}.base.response.Wrapper;
-import ${basePackage}.entity.${modelNameUpperCamel};
-import ${basePackage}.service.${modelNameUpperCamel}Service;
+import ${modelPackage}.${modelNameUpperCamel};
+import ${servicePackage}.${modelNameUpperCamel}Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
