@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +20,9 @@ public class SysMenuServiceImpl extends AbstractService<SysMenu> implements SysM
     @Resource
     private SysMenuMapper sysMenuMapper;
 
+    @Override
+    public List<SysMenu> findAllMenusWithRole() {
+
+        return sysMenuMapper.selectAllMenusWithRole();
+    }
 }
