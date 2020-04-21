@@ -1,6 +1,7 @@
 package aystzh.com.study.entity.security;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "sys_menu")
@@ -40,6 +41,10 @@ public class SysMenu {
 
     @Column(name = "modify_time")
     private Date modifyTime;
+
+    private List<SysMenu> children;
+
+    private List<SysRole> roles;
 
     /**
      * @return id
@@ -235,5 +240,21 @@ public class SysMenu {
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public List<SysMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysMenu> children) {
+        this.children = children;
+    }
+
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
     }
 }

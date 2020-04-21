@@ -20,7 +20,26 @@
     <result column="modifier" jdbcType="INTEGER" property="modifier" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
-    <select id="selectAllMenusWithRole" resultType="aystzh.com.study.entity.security.SysMenu">
+    <resultMap id="MenuWithRole" type="aystzh.com.study.entity.security.SysMenu" extends="BaseResultMap">
+        <collection property="roles" ofType="aystzh.com.study.entity.security.SysRole">
+            <id column="roleId" property="id"/>
+            <result column="roleName" property="name"/>
+            <result column="description" property="description"/>
+        </collection>
+    </resultMap>
 
+    <select id="selectAllMenusWithRole" resultMap="MenuWithRole">
+        SELECT
+            m.*,
+            r.id AS roleId,
+            r.`name` AS roleName,
+            r.description
+        FROM
+            sys_menu m,
+            sys_menu_role mr,
+            sys_role r
+        WHERE
+            m.id = mr.menu_id
+            AND mr.role_id = r.id;
     </select>
 </mapper>
