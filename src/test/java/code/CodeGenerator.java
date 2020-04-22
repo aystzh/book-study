@@ -40,7 +40,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCode("sys_admin","sys_admin_role","sys_menu","sys_menu_role","sys_role");
+        genCode("hr","hr_role","menu","menu_role","role");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 
