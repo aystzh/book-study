@@ -1,5 +1,8 @@
 package aystzh.com.study.entity.security;
 
+import aystzh.com.base.annotations.CreateTime;
+import aystzh.com.base.annotations.ModifyTime;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -62,6 +65,7 @@ public class SysAdmin {
     /**
      * 创建时间
      */
+    @CreateTime
     @Column(name = "create_time")
     private Date createTime;
 
@@ -73,6 +77,7 @@ public class SysAdmin {
     /**
      * 修改时间
      */
+    @ModifyTime
     @Column(name = "modify_time")
     private Date modifyTime;
 

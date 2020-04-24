@@ -1,5 +1,8 @@
 package aystzh.com.study.entity.security;
 
+import aystzh.com.base.annotations.CreateTime;
+import aystzh.com.base.annotations.ModifyTime;
+
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -34,11 +37,13 @@ public class SysMenu {
 
     private Integer creator;
 
+    @CreateTime
     @Column(name = "create_time")
     private Date createTime;
 
     private Integer modifier;
 
+    @ModifyTime
     @Column(name = "modify_time")
     private Date modifyTime;
 
