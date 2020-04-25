@@ -11,6 +11,8 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,8 @@ public class SysAdminController {
     @ApiOperation(value = "登录接口",notes = "登录")
     @GetMapping("/login")
     public Wrapper login() {
+        //从threadLocal当中获取用户信息
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return WrapMapper.error().message("尚未登录，请登录");
     }
 
