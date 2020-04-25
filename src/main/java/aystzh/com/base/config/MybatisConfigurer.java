@@ -46,7 +46,6 @@ public class MybatisConfigurer {
 
         //添加插件 分页插件和时间处理插件
         factory.setPlugins(new Interceptor[]{pageHelper,dateTimeInterceptor()});
-
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         factory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));

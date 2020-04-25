@@ -3,11 +3,11 @@ package aystzh.com.study.entity.security;
 import aystzh.com.base.annotations.CreateTime;
 import aystzh.com.base.annotations.ModifyTime;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "sys_admin")
-public class SysAdmin {
+public class SysAdmin  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -104,6 +104,7 @@ public class SysAdmin {
         return username;
     }
 
+
     /**
      * 设置用户名
      *
@@ -112,6 +113,8 @@ public class SysAdmin {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
 
     /**
      * 获取密码
@@ -328,4 +331,5 @@ public class SysAdmin {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
 }

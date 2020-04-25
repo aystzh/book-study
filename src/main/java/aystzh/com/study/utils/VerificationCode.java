@@ -1,4 +1,4 @@
-package aystzh.com.study.config.security;
+package aystzh.com.study.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

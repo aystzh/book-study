@@ -20,4 +20,17 @@
     <result column="modifier" jdbcType="INTEGER" property="modifier" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
+
+  <select id="selectHrRolesById" resultType="aystzh.com.study.entity.security.SysRole">
+      SELECT
+      r.id,
+      r.name,
+      r.description
+  FROM
+      sys_role r,
+      sys_admin_role hrr
+  WHERE
+      hrr.role_id = r.`id`
+      AND hrr.admin_id = #{id}
+  </select>
 </mapper>

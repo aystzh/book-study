@@ -5,6 +5,7 @@ import ${corePackage}.base.response.WrapMapper;
 import ${corePackage}.base.response.Wrapper;
 import ${modelPackage}.${modelNameUpperCamel};
 import ${servicePackage}.${modelNameUpperCamel}Service;
+import lombok.extern.log4j.Log4j2;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
 * Created by ${author} on ${date}.
 */
+@Log4j2
 @RestController
 @RequestMapping("${baseRequestMapping}")
 public class ${modelNameUpperCamel}Controller {
