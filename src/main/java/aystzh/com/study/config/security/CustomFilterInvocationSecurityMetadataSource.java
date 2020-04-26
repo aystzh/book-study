@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 动态权限数据源，用于获取动态权限规则
  * created by zhanghuan on 2020/4/20.
  */
 @Component
