@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -47,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/index.html", "/img/**", "/fonts/**", "/favicon.ico", "/sys/admin/verifyCode");
+        List<String> urls = ignoreUrlsConfig().getUrls();
+        web.ignoring().antMatchers(urls.toArray(new String[0]));
     }
 
     @Bean
