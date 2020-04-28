@@ -24,4 +24,10 @@ public class SysMenuServiceImpl extends AbstractService<SysMenu> implements SysM
     public List<SysMenu> findAllMenusWithRole() {
         return sysMenuMapper.selectAllMenusWithRole();
     }
+
+    @Override
+    public List<SysMenu> findMenusByAdminId(Integer adminId) {
+
+        return null;
+    }
 }

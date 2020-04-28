@@ -11,4 +11,6 @@ import java.util.List;
 public interface SysMenuService extends Service<SysMenu> {
     //查询所有菜单和角色的关系
      List<SysMenu> findAllMenusWithRole();
+
+    List<SysMenu> findMenusByAdminId(Integer adminId);
 }
