@@ -3,37 +3,32 @@ package aystzh.com.study.entity.security;
 import aystzh.com.base.annotations.CreateTime;
 import aystzh.com.base.annotations.ModifyTime;
 
-import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Table(name = "sys_menu")
-public class SysMenu {
+public class SysMenu implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String url;
-
-    private String path;
-
-    private String component;
-
     private String name;
 
-    @Column(name = "icon_cls")
-    private String iconCls;
-
-    @Column(name = "keep_alive")
-    private Boolean keepAlive;
-
-    @Column(name = "require_auth")
-    private Boolean requireAuth;
+    @Column(name = "icon")
+    private String icon;
 
     @Column(name = "parent_id")
     private Integer parentId;
 
-    private Boolean enabled;
+    private Boolean hidden;
+
+    private Integer level;
+
+    private Integer sort;
+
+    private String title;
 
     private Integer creator;
 
@@ -46,10 +41,6 @@ public class SysMenu {
     @ModifyTime
     @Column(name = "modify_time")
     private Date modifyTime;
-
-    private List<SysMenu> children;
-
-    private List<SysRole> roles;
 
     /**
      * @return id
@@ -65,47 +56,6 @@ public class SysMenu {
         this.id = id;
     }
 
-    /**
-     * @return url
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * @param url
-     */
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    /**
-     * @return path
-     */
-    public String getPath() {
-        return path;
-    }
-
-    /**
-     * @param path
-     */
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    /**
-     * @return component
-     */
-    public String getComponent() {
-        return component;
-    }
-
-    /**
-     * @param component
-     */
-    public void setComponent(String component) {
-        this.component = component;
-    }
 
     /**
      * @return name
@@ -121,47 +71,6 @@ public class SysMenu {
         this.name = name;
     }
 
-    /**
-     * @return icon_cls
-     */
-    public String getIconCls() {
-        return iconCls;
-    }
-
-    /**
-     * @param iconCls
-     */
-    public void setIconCls(String iconCls) {
-        this.iconCls = iconCls;
-    }
-
-    /**
-     * @return keep_alive
-     */
-    public Boolean getKeepAlive() {
-        return keepAlive;
-    }
-
-    /**
-     * @param keepAlive
-     */
-    public void setKeepAlive(Boolean keepAlive) {
-        this.keepAlive = keepAlive;
-    }
-
-    /**
-     * @return require_auth
-     */
-    public Boolean getRequireAuth() {
-        return requireAuth;
-    }
-
-    /**
-     * @param requireAuth
-     */
-    public void setRequireAuth(Boolean requireAuth) {
-        this.requireAuth = requireAuth;
-    }
 
     /**
      * @return parent_id
@@ -177,18 +86,12 @@ public class SysMenu {
         this.parentId = parentId;
     }
 
-    /**
-     * @return enabled
-     */
-    public Boolean getEnabled() {
-        return enabled;
+    public Boolean getHidden() {
+        return hidden;
     }
 
-    /**
-     * @param enabled
-     */
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
     }
 
     /**
@@ -247,19 +150,53 @@ public class SysMenu {
         this.modifyTime = modifyTime;
     }
 
-    public List<SysMenu> getChildren() {
-        return children;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setChildren(List<SysMenu> children) {
-        this.children = children;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public List<SysRole> getRoles() {
-        return roles;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "SysMenu{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", parentId=" + parentId +
+                ", enabled=" + hidden +
+                ", level=" + level +
+                ", sort=" + sort +
+                ", title='" + title + '\'' +
+                ", creator=" + creator +
+                ", createTime=" + createTime +
+                ", modifier=" + modifier +
+                ", modifyTime=" + modifyTime +
+                '}';
     }
 }

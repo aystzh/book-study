@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="aystzh.com.study.dao.security.SysMenuMapper">
-  <resultMap id="BaseResultMap" type="aystzh.com.study.entity.security.SysMenu">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="path" jdbcType="VARCHAR" property="path" />
-    <result column="component" jdbcType="VARCHAR" property="component" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="icon_cls" jdbcType="VARCHAR" property="iconCls" />
-    <result column="keep_alive" jdbcType="BIT" property="keepAlive" />
-    <result column="require_auth" jdbcType="BIT" property="requireAuth" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="enabled" jdbcType="BIT" property="enabled" />
-    <result column="creator" jdbcType="INTEGER" property="creator" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modifier" jdbcType="INTEGER" property="modifier" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
-  </resultMap>
-    <resultMap id="MenuWithRole" type="aystzh.com.study.entity.security.SysMenu" extends="BaseResultMap">
-        <collection property="roles" ofType="aystzh.com.study.entity.security.SysRole">
-            <id column="roleId" property="id"/>
-            <result column="roleName" property="name"/>
-            <result column="description" property="description"/>
-        </collection>
+    <resultMap id="BaseResultMap" type="aystzh.com.study.entity.security.SysMenu">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="hidden" jdbcType="BIT" property="hidden"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="creator" jdbcType="INTEGER" property="creator"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modifier" jdbcType="INTEGER" property="modifier"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
 
-    <select id="selectAllMenusWithRole" resultMap="MenuWithRole">
+    <select id="selectAllMenusWithRole" resultMap="BaseResultMap">
         SELECT
             m.*,
             r.id AS roleId,

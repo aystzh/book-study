@@ -1,7 +1,6 @@
 package aystzh.com.study.config.security;
 
 import aystzh.com.study.entity.security.SysMenu;
-import aystzh.com.study.entity.security.SysRole;
 import aystzh.com.study.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -13,7 +12,6 @@ import org.springframework.util.AntPathMatcher;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 动态权限数据源，用于获取动态权限规则
@@ -30,10 +28,10 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
         String requestUrl = ((FilterInvocation) object).getRequestUrl();
         List<SysMenu> sysMenus = sysMenuService.findAllMenusWithRole();
         for (SysMenu sysMenu : sysMenus) {
-            if (antPathMatcher.match(sysMenu.getUrl(), requestUrl)) {
+        /*    if (antPathMatcher.match(sysMenu.getUrl(), requestUrl)) {
                 List<SysRole> roles = sysMenu.getRoles();
                 return SecurityConfig.createList(roles.stream().map(SysRole::getName).collect(Collectors.toList()).toArray(new String[roles.size()]));
-            }
+            }*/
         }
         return SecurityConfig.createList("ROLE_LOGIN");
     }
