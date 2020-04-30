@@ -3,11 +3,12 @@ package aystzh.com.study.entity.security;
 import aystzh.com.base.annotations.CreateTime;
 import aystzh.com.base.annotations.ModifyTime;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Table(name = "sys_role")
-public class SysRole {
+public class SysRole implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,9 +19,16 @@ public class SysRole {
     private String name;
 
     /**
-     * 角色描述
+     * 角色描述a
      */
     private String description;
+
+    @Column(name = "admin_count")
+    private Integer adminCount;
+
+    private Integer sort;
+
+    private Boolean status;
 
     private Integer creator;
 
@@ -138,5 +146,29 @@ public class SysRole {
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public Integer getAdminCount() {
+        return adminCount;
+    }
+
+    public void setAdminCount(Integer adminCount) {
+        this.adminCount = adminCount;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }
