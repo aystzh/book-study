@@ -3,11 +3,12 @@ package aystzh.com.study.entity.security;
 import aystzh.com.base.annotations.CreateTime;
 import aystzh.com.base.annotations.ModifyTime;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Table(name = "sys_admin_role")
-public class SysAdminRole {
+public class SysAdminRole implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
