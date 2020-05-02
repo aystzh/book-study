@@ -180,4 +180,23 @@ public class SysAdmin  implements Serializable {
     public void setLoginTime(Date loginTime) {
         this.loginTime = loginTime;
     }
+
+    @Override
+    public String toString() {
+        return "SysAdmin{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
+                ", icon='" + icon + '\'' +
+                ", note='" + note + '\'' +
+                ", enabled=" + enabled +
+                ", loginTime=" + loginTime +
+                ", creator=" + creator +
+                ", createTime=" + createTime +
+                ", modifier=" + modifier +
+                ", modifyTime=" + modifyTime +
+                '}';
+    }
 }

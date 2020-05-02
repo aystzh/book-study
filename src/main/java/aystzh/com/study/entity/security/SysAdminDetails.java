@@ -73,4 +73,11 @@ public class SysAdminDetails implements UserDetails {
         return sysAdmin.getUsername();
     }
 
+    @Override
+    public String toString() {
+        return "SysAdminDetails{" +
+                "sysAdmin=" + sysAdmin +
+                ", roles=" + roles +
+                '}';
+    }
 }

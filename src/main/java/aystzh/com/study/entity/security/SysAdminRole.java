@@ -128,4 +128,17 @@ public class SysAdminRole implements Serializable {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+    @Override
+    public String toString() {
+        return "SysAdminRole{" +
+                "id=" + id +
+                ", adminId=" + adminId +
+                ", roleId=" + roleId +
+                ", creator=" + creator +
+                ", createTime=" + createTime +
+                ", modifier=" + modifier +
+                ", modifyTime=" + modifyTime +
+                '}';
+    }
 }

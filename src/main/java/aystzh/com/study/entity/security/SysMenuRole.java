@@ -3,8 +3,8 @@ package aystzh.com.study.entity.security;
 import aystzh.com.base.annotations.CreateTime;
 import aystzh.com.base.annotations.ModifyTime;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "sys_menu_role")
 public class SysMenuRole {
@@ -126,5 +126,18 @@ public class SysMenuRole {
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    @Override
+    public String toString() {
+        return "SysMenuRole{" +
+                "id=" + id +
+                ", menuId=" + menuId +
+                ", roleId=" + roleId +
+                ", creator=" + creator +
+                ", createTime=" + createTime +
+                ", modifier=" + modifier +
+                ", modifyTime=" + modifyTime +
+                '}';
     }
 }

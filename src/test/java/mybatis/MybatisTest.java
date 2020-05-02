@@ -2,12 +2,11 @@ package mybatis;
 
 import aystzh.com.BookStudyApplication;
 import aystzh.com.study.entity.Author;
-import aystzh.com.study.entity.security.SysMenu;
-import aystzh.com.study.entity.tmp.UmsMenu;
+import aystzh.com.study.entity.security.SysPermission;
+import aystzh.com.study.entity.tmp.UmsPermission;
 import aystzh.com.study.service.AuthorService;
-import aystzh.com.study.service.SysAdminService;
-import aystzh.com.study.service.SysMenuService;
-import aystzh.com.study.service.UmsMenuService;
+import aystzh.com.study.service.SysPermissionService;
+import aystzh.com.study.service.UmsPermissionService;
 import aystzh.com.study.utils.BeanMapping;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,24 +28,26 @@ public class MybatisTest {
 
     @Autowired
     private AuthorService authorService;
-    @Autowired
-    private SysMenuService sysMenuService;
 
     @Autowired
-    private UmsMenuService umsMenuService;
+    private UmsPermissionService umsPermissionService;
 
     @Autowired
-    private SysAdminService sysAdminService;
+    private SysPermissionService sysPermissionService;
+
 
 
     @Test
     public void syncData() throws Exception {
-        List<UmsMenu> all = umsMenuService.findAll();
-        for (UmsMenu umsMenu : all) {
-            SysMenu sysMenu = BeanMapping.map(umsMenu, SysMenu.class);
-            sysMenu.setCreator(1);
-            sysMenu.setModifier(1);
-            sysMenuService.save(sysMenu);
+        List<UmsPermission> all = umsPermissionService.findAll();
+        for (UmsPermission umsRoleMenuRelation : all) {
+            SysPermission map = BeanMapping.map(umsRoleMenuRelation, SysPermission.class);
+            map.setCreator(1);
+            map.setModifier(1);
+            map.setEnabled(umsRoleMenuRelation.getStatus());
+            map.setParentId(umsRoleMenuRelation.getPid());
+            System.out.println(map);
+            sysPermissionService.save(map);
         }
     }
 
@@ -60,11 +61,5 @@ public class MybatisTest {
         criteria.andLike("name", "贝吉");
         List<Author> authors = authorService.findByCondition(condition);
         System.out.println(authors);
-    }
-
-    @Test
-    public void testSecurity() {
-        List<SysMenu> allMenusWithRole = sysMenuService.findAllMenusWithRole();
-        System.out.println(allMenusWithRole);
     }
 }

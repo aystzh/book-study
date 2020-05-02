@@ -7,40 +7,44 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Table(name = "sys_role")
-public class SysRole implements Serializable {
+@Table(name = "sys_resource")
+public class SysResource implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**
-     * 角色名称
+     * 资源名称
      */
     private String name;
 
     /**
-     * 角色描述a
+     * 资源路径
+     */
+    private String url;
+
+    /**
+     * 描述
      */
     private String description;
 
-    @Column(name = "admin_count")
-    private Integer adminCount;
-
-    private Integer sort;
-
-    private Boolean status;
-
-    private Integer creator;
+    /**
+     * 资源分类id
+     */
+    @Column(name = "category_id")
+    private Integer categoryId;
 
     @CreateTime
     @Column(name = "create_time")
     private Date createTime;
 
-    private Integer modifier;
+    private Integer creator;
 
     @ModifyTime
     @Column(name = "modify_time")
     private Date modifyTime;
+
+    private Integer modifier;
 
     /**
      * @return id
@@ -57,53 +61,75 @@ public class SysRole implements Serializable {
     }
 
     /**
-     * 获取角色名称
+     * 获取资源名称
      *
-     * @return name - 角色名称
+     * @return name - 资源名称
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 设置角色名称
+     * 设置资源名称
      *
-     * @param name 角色名称
+     * @param name 资源名称
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 获取角色描述
+     * 获取资源路径
      *
-     * @return description - 角色描述
+     * @return url - 资源路径
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * 设置资源路径
+     *
+     * @param url 资源路径
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * 获取描述
+     *
+     * @return description - 描述
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 设置角色描述
+     * 设置描述
      *
-     * @param description 角色描述
+     * @param description 描述
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * @return creator
+     * 获取资源分类id
+     *
+     * @return category_id - 资源分类id
      */
-    public Integer getCreator() {
-        return creator;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
     /**
-     * @param creator
+     * 设置资源分类id
+     *
+     * @param categoryId 资源分类id
      */
-    public void setCreator(Integer creator) {
-        this.creator = creator;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     /**
@@ -121,17 +147,17 @@ public class SysRole implements Serializable {
     }
 
     /**
-     * @return modifier
+     * @return creator
      */
-    public Integer getModifier() {
-        return modifier;
+    public Integer getCreator() {
+        return creator;
     }
 
     /**
-     * @param modifier
+     * @param creator
      */
-    public void setModifier(Integer modifier) {
-        this.modifier = modifier;
+    public void setCreator(Integer creator) {
+        this.creator = creator;
     }
 
     /**
@@ -148,43 +174,32 @@ public class SysRole implements Serializable {
         this.modifyTime = modifyTime;
     }
 
-    public Integer getAdminCount() {
-        return adminCount;
+    /**
+     * @return modifier
+     */
+    public Integer getModifier() {
+        return modifier;
     }
 
-    public void setAdminCount(Integer adminCount) {
-        this.adminCount = adminCount;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
+    /**
+     * @param modifier
+     */
+    public void setModifier(Integer modifier) {
+        this.modifier = modifier;
     }
 
     @Override
     public String toString() {
-        return "SysRole{" +
+        return "SysResource{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
                 ", description='" + description + '\'' +
-                ", adminCount=" + adminCount +
-                ", sort=" + sort +
-                ", status=" + status +
-                ", creator=" + creator +
+                ", categoryId=" + categoryId +
                 ", createTime=" + createTime +
-                ", modifier=" + modifier +
+                ", creator=" + creator +
                 ", modifyTime=" + modifyTime +
+                ", modifier=" + modifier +
                 '}';
     }
 }

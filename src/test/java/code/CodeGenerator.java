@@ -1,7 +1,6 @@
 package code;
 
 import com.google.common.base.CaseFormat;
-import com.google.common.collect.Lists;
 import freemarker.template.TemplateExceptionHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
@@ -40,7 +39,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCode("hr","hr_role","menu","menu_role","role");
+        genCode("sys_resource");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 
