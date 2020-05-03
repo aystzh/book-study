@@ -2,12 +2,7 @@ package mybatis;
 
 import aystzh.com.BookStudyApplication;
 import aystzh.com.study.entity.Author;
-import aystzh.com.study.entity.security.SysPermission;
-import aystzh.com.study.entity.tmp.UmsPermission;
 import aystzh.com.study.service.AuthorService;
-import aystzh.com.study.service.SysPermissionService;
-import aystzh.com.study.service.UmsPermissionService;
-import aystzh.com.study.utils.BeanMapping;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,26 +24,9 @@ public class MybatisTest {
     @Autowired
     private AuthorService authorService;
 
-    @Autowired
-    private UmsPermissionService umsPermissionService;
-
-    @Autowired
-    private SysPermissionService sysPermissionService;
-
-
-
     @Test
     public void syncData() throws Exception {
-        List<UmsPermission> all = umsPermissionService.findAll();
-        for (UmsPermission umsRoleMenuRelation : all) {
-            SysPermission map = BeanMapping.map(umsRoleMenuRelation, SysPermission.class);
-            map.setCreator(1);
-            map.setModifier(1);
-            map.setEnabled(umsRoleMenuRelation.getStatus());
-            map.setParentId(umsRoleMenuRelation.getPid());
-            System.out.println(map);
-            sysPermissionService.save(map);
-        }
+
     }
 
 
