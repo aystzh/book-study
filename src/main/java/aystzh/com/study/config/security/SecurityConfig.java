@@ -1,7 +1,9 @@
 package aystzh.com.study.config.security;
 
 import aystzh.com.study.config.security.compoment.*;
+import aystzh.com.study.service.DynamicSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
     @Autowired
     CustomUrlDecisionManager customUrlDecisionManager;
+
+    @Autowired(required = false)
+    private DynamicSecurityService dynamicSecurityService;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -100,5 +105,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public RestfulAccessDeniedHandler restfulAccessDeniedHandler() {
         return new RestfulAccessDeniedHandler();
+    }
+
+    @ConditionalOnBean(name = "dynamicSecurityService")
+    @Bean
+    public CustomUrlDecisionManager dynamicAccessDecisionManager() {
+        return new CustomUrlDecisionManager();
+    }
+
+    @ConditionalOnBean(name = "dynamicSecurityService")
+    @Bean
+    public CustomFilterInvocationSecurityMetadataSource dynamicSecurityMetadataSource() {
+        return new CustomFilterInvocationSecurityMetadataSource();
     }
 }
