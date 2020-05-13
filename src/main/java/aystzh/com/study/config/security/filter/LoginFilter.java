@@ -1,4 +1,4 @@
-package aystzh.com.study.config.security;
+package aystzh.com.study.config.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;

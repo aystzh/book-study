@@ -20,7 +20,7 @@ import java.util.Objects;
  * 动态权限数据源，用于获取动态权限规则
  * created by zhanghuan on 2020/4/20.
  */
-public class CustomFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+public class DynamicSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     private static Map<String, ConfigAttribute> configAttributeMap = null;
     @Autowired

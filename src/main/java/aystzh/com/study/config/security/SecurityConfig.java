@@ -1,35 +1,67 @@
 package aystzh.com.study.config.security;
 
 import aystzh.com.study.config.security.compoment.*;
+import aystzh.com.study.config.security.filter.DynamicSecurityFilter;
+import aystzh.com.study.config.security.filter.LoginFilter;
 import aystzh.com.study.service.DynamicSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.List;
+import java.util.Objects;
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
+    DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
     @Autowired
-    CustomUrlDecisionManager customUrlDecisionManager;
+    DynamicAccessDecisionManager dynamicAccessDecisionManager;
 
     @Autowired(required = false)
     private DynamicSecurityService dynamicSecurityService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
+                .authorizeRequests();
+        //不需要保护的资源路径允许访问
+        for (String url : ignoreUrlsConfig().getUrls()) {
+            registry.antMatchers(url).permitAll();
+        }
+        //允许跨域请求的OPTIONS请求
+        registry.antMatchers(HttpMethod.OPTIONS)
+                .permitAll();
+        // 任何请求需要身份认证
+        registry.and()
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                // 关闭跨站请求防护及不使用session
+                .and()
+                .csrf()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling()
+                //没有认证时，在这里处理结果，不要重定向
+                .authenticationEntryPoint(restfulAuthenticationEntryPoint())
+                .accessDeniedHandler(restfulAccessDeniedHandler())
+                //自定义登录过滤器
+                .and()
+                .addFilterBefore(loginFilter(), UsernamePasswordAuthenticationFilter.class);
+        if (!Objects.isNull(dynamicSecurityService)) {
+            registry.and().addFilterBefore(dynamicSecurityFilter(), FilterSecurityInterceptor.class);
+        }
     }
 
     @Override
@@ -37,10 +69,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        List<String> urls = ignoreUrlsConfig().getUrls();
-        web.ignoring().antMatchers(urls.toArray(new String[0]));
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -58,28 +89,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return loginFilter;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
-                .authorizeRequests();
-        registry.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-            @Override
-            public <O extends FilterSecurityInterceptor> O postProcess(O object) {
-                object.setAccessDecisionManager(customUrlDecisionManager);
-                object.setSecurityMetadataSource(customFilterInvocationSecurityMetadataSource);
-                return object;
-            }
-        })
-                .and()
-                .logout()
-                .logoutSuccessHandler(restfulLogoutSuccessHandler())
-                .permitAll()
-                .and()
-                .csrf().disable().exceptionHandling()
-                //没有认证时，在这里处理结果，不要重定向
-                .authenticationEntryPoint(restfulAuthenticationEntryPoint())
-                .accessDeniedHandler(restfulAccessDeniedHandler());
-        http.addFilterAt(loginFilter(), UsernamePasswordAuthenticationFilter.class);
+    @ConditionalOnBean(name = "dynamicSecurityService")
+    @Bean
+    public DynamicAccessDecisionManager dynamicAccessDecisionManager() {
+        return new DynamicAccessDecisionManager();
+    }
+
+    @ConditionalOnBean(name = "dynamicSecurityService")
+    @Bean
+    public DynamicSecurityFilter dynamicSecurityFilter() {
+        return new DynamicSecurityFilter();
+    }
+
+    @ConditionalOnBean(name = "dynamicSecurityService")
+    @Bean
+    public DynamicSecurityMetadataSource dynamicSecurityMetadataSource() {
+        return new DynamicSecurityMetadataSource();
+    }
+
+    @Bean
+    public RestfulAccessDeniedHandler restfulAccessDeniedHandler() {
+        return new RestfulAccessDeniedHandler();
+    }
+
+    @Bean
+    public RestfulAuthenticationEntryPoint restfulAuthenticationEntryPoint() {
+        return new RestfulAuthenticationEntryPoint();
     }
 
     @Bean
@@ -93,29 +128,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public RestfulAuthenticationEntryPoint restfulAuthenticationEntryPoint() {
-        return new RestfulAuthenticationEntryPoint();
-    }
-
-    @Bean
     public RestfulLogoutSuccessHandler restfulLogoutSuccessHandler() {
         return new RestfulLogoutSuccessHandler();
     }
 
-    @Bean
-    public RestfulAccessDeniedHandler restfulAccessDeniedHandler() {
-        return new RestfulAccessDeniedHandler();
-    }
 
-    @ConditionalOnBean(name = "dynamicSecurityService")
-    @Bean
-    public CustomUrlDecisionManager dynamicAccessDecisionManager() {
-        return new CustomUrlDecisionManager();
-    }
-
-    @ConditionalOnBean(name = "dynamicSecurityService")
-    @Bean
-    public CustomFilterInvocationSecurityMetadataSource dynamicSecurityMetadataSource() {
-        return new CustomFilterInvocationSecurityMetadataSource();
-    }
 }

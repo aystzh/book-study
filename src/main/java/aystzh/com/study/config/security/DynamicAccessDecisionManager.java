@@ -6,7 +6,6 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
@@ -14,8 +13,7 @@ import java.util.Collection;
 /**
  * 动态权限决策管理器，用于判断用户是否有访问权限
  */
-@Component
-public class CustomUrlDecisionManager implements AccessDecisionManager {
+public class DynamicAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
         if (CollectionUtils.isEmpty(configAttributes)) {
