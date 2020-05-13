@@ -1,4 +1,4 @@
-package aystzh.com.study.config.security;
+package aystzh.com.study.config.security.compoment;
 
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;

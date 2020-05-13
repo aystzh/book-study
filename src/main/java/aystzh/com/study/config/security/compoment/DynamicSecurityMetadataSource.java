@@ -1,4 +1,4 @@
-package aystzh.com.study.config.security;
+package aystzh.com.study.config.security.compoment;
 
 import aystzh.com.study.service.DynamicSecurityService;
 import cn.hutool.core.util.URLUtil;

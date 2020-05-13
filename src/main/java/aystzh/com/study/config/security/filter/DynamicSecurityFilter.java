@@ -1,7 +1,7 @@
 package aystzh.com.study.config.security.filter;
 
-import aystzh.com.study.config.security.DynamicSecurityMetadataSource;
-import aystzh.com.study.config.security.DynamicAccessDecisionManager;
+import aystzh.com.study.config.security.compoment.DynamicSecurityMetadataSource;
+import aystzh.com.study.config.security.compoment.DynamicAccessDecisionManager;
 import aystzh.com.study.config.security.IgnoreUrlsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
