@@ -18,7 +18,7 @@ public class MaxArea {
         int left = 0, right = height.length - 1;
         int ans = 0;
         while (left < right) {
-            int area = Math.min(height[left], height[right]) * (right - 1);
+            int area = Math.min(height[left], height[right]) * (right - left);
             ans = Math.max(area, ans);
             if (height[left] <= height[right]) {
                 ++left;
@@ -31,7 +31,7 @@ public class MaxArea {
 
     @Test
     public void test() {
-        int [] height = {1,8,6,2,5,4,8,3,7};
+        int [] height = {1,1};
         int solution = solution(height);
         System.out.println(String.format("最多盛水的面积为: %d",solution));
     }
