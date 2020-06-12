@@ -28,4 +28,6 @@ secure:
       - /actuator/**
       - /druid/**
       - /sys/admin/verifyCode
-
+logging:
+  level:
+    root: INFO #日志配置DEBUG,INFO,WARN,ERROR

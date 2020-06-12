@@ -1,7 +1,9 @@
 package aystzh.com.study.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -21,5 +23,18 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedOrigins("*")
                 .allowedMethods("*");
+    }
+
+
+    @Bean
+    public MyInterceptor getMyInterceptor() {
+        System.out.println("注入 myInterceptor");
+        return new MyInterceptor();
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(getMyInterceptor()).addPathPatterns("/**").order(2);
+        registry.addInterceptor(new MyInterceptor2()).addPathPatterns("/**").order(1);
     }
 }
