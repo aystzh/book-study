@@ -25,7 +25,7 @@ public class MybatisTest {
     private AuthorService authorService;
 
     @Test
-    public void syncData() throws Exception {
+    public void syncData() {
 
     }
 
